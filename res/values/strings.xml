@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WiFi Scan</string>
+    <string name="scanner_activity_name">Wifi Scan</string>
+    <string name="loading_activity_name">Loading</string>
+    <string name="scan_button">Scan</string>
+    <string name="detail_notes_hint">Notes about this network</string>
+    <string name="detail_ssid">SSID</string>
+    <string name="detail_bssid">BSSID</string>
+    <string name="detail_password">Password</string>
+    <string name="detail_last_seen">Last Seen:</string>
+    <string name="detail_location">Location:</string>
+    <string name="detail_security">Security</string>
+    <string name="wifi_detail_activity_name">Details</string>
+    <string name="scan_menu_refresh">Refresh</string>
+    <string name="scan_menu_clear">Clear</string>
+    <string name="main_refresh_hint">Press \"Menu->Refresh\" to scan for networks.</string>
+    <string name="dialog_activate_wifi">Wifi appears to be off. Would you like to turn it on?</string>
+    <string name="details_frequency">Frequency:</string>
+    <string name="detail_signal">Signal Strength:</string>
+
+</resources>
