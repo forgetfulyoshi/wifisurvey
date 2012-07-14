@@ -1,4 +1,4 @@
-wifiscanner
+wifisurvey
 ===========
 
-Wifi Scanner designed primarily for site surveys and basic security evaluations
+Wifi survey tool designed primarily for site surveys and basic security evaluations
