@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.routerraiders.wifitester"
     android:versionCode="1"
-    android:versionName="0.2.0" >
+    android:versionName="0.1.0" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -15,7 +15,7 @@
 
     <application
         android:icon="@drawable/ic_wifiscanner"
-        android:label="@string/app_name">
+        android:label="@string/app_name" >
         <activity
             android:name="ScannerActivity"
             android:label="@string/scanner_activity_name" >
@@ -29,7 +29,6 @@
             android:name="WifiDetailActivity"
             android:label="@string/wifi_detail_activity_name" >
         </activity>
-
     </application>
 
 </manifest>
