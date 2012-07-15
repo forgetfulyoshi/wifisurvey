@@ -19,5 +19,6 @@
     <string name="dialog_activate_wifi">Wifi appears to be off. Would you like to turn it on?</string>
     <string name="details_frequency">Frequency:</string>
     <string name="detail_signal">Signal Strength:</string>
+    <string name="detail_login_button">Connect</string>
 
 </resources>

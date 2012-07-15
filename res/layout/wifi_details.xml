@@ -101,14 +101,28 @@
         android:text="@string/detail_security"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <EditText
-        android:id="@+id/detail_password"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="@string/detail_password"
-        android:inputType="textPassword|textVisiblePassword" />
+        android:layout_marginTop="24dp" >
+
+        <EditText
+            android:id="@+id/detail_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/detail_password"
+            android:inputType="textPassword|textVisiblePassword" />
+
+        <Button
+            android:id="@+id/detail_login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/detail_login_button" />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/detail_notes"
