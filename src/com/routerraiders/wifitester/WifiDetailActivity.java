@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -33,7 +34,7 @@ public class WifiDetailActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	this.setContentView(R.layout.wifi_details);
-
+	
 	mSsid = (TextView) this.findViewById(R.id.detail_ssid);
 	mBssid = (TextView) this.findViewById(R.id.detail_bssid);
 	mLocation = (TextView) this.findViewById(R.id.detail_location);
@@ -114,15 +115,8 @@ public class WifiDetailActivity extends Activity {
 	
 	Log.d(TAG, "exiting onPause");
     }
-
-    public void onStop() {
-	super.onStop();
-	Log.d(TAG, "exiting onStop");
-    }
-
-    public void onDestroy() {
-	super.onDestroy();
-
-	Log.d(TAG, "exiting onDestroy");
+    
+    public void onLoginClick(View button) {
+	Log.d(TAG, "exiting onLoginClick");
     }
 }

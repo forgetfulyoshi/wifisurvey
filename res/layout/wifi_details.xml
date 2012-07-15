@@ -120,7 +120,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="fill_vertical"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/detail_login_button" />
+            android:text="@string/detail_login_button"
+            android:onClick="onLoginClick" />
 
     </LinearLayout>
 
