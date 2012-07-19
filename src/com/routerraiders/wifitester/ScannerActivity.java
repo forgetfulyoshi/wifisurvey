@@ -162,7 +162,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
     }
 
     private void clearWifiList() {
-	AsyncTask<Void, Void, Void> clearTask = new AsyncTask<Void, Void, Void>() {
+	new AsyncTask<Void, Void, Void>() {
 
 	    @Override
 	    protected Void doInBackground(Void... params) {
@@ -177,9 +177,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 		mAdapter.changeCursor(null);
 		mAdapter.notifyDataSetChanged();
 	    }
-	};
-
-	clearTask.execute();
+	}.execute();
 
 	scanWifi();
     }
