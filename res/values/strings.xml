@@ -20,5 +20,8 @@
     <string name="details_frequency">Frequency:</string>
     <string name="detail_signal">Signal Strength:</string>
     <string name="detail_login_button">Connect</string>
+    <string name="login_successful">Login was successful</string>
+    <string name="login_failed">Login failed</string>
+    <string name="wifi_add_failure">Failed to add network</string>
 
 </resources>
