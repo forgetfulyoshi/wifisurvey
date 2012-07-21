@@ -123,7 +123,6 @@ public class WifiDetailActivity extends Activity {
     public void onLoginClick(View button) {
 	
 	String ssid = mSsid.getText().toString();
-	String bssid = mBssid.getText().toString();
 	String security = mSecurity.getText().toString();
 	String password = mPassword.getText().toString();
 	
@@ -141,10 +140,6 @@ public class WifiDetailActivity extends Activity {
 	    }
 	} else {
 	    Toast.makeText(this.getApplicationContext(), R.string.wifi_add_failure, Toast.LENGTH_SHORT).show();
-	}
-	
-	for (WifiConfiguration config : manager.getConfiguredNetworks()) {
-	    Log.i(TAG, config.toString());
 	}
 
 	Log.d(TAG, "exiting onLoginClick");
@@ -166,16 +161,6 @@ public class WifiDetailActivity extends Activity {
 	} else {
 	    config.allowedKeyManagement.set(KeyMgmt.NONE);
 	}
-
-	//config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
-	//config.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
-	//config.allowedProtocols.set(WifiConfiguration.Protocol.WPA);
-	//config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
-	//config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.SHARED);
-	//config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
-	//config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
-	//config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
-	//config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP104);
 
 	Log.i(TAG, "Created configuration: " + config.SSID + " :: " + config.preSharedKey);
 	
