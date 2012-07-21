@@ -5,9 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 
 public class WifiScannerService extends IntentService {
-	//private static final String TAG = "WifiScannerService";
+	private static final String TAG = "WifiScannerService";
 
 	private WifiManager mWifiService;
 	private WifiBroadcastReceiver mWifiReceiver;
@@ -15,7 +16,7 @@ public class WifiScannerService extends IntentService {
 
 	public WifiScannerService() {
 		super("WifiScannerService");
-		//Log.d(TAG, "Constructed");
+		Log.d(TAG, "Constructed");
 	}
 
 	public void onCreate() {
@@ -34,13 +35,13 @@ public class WifiScannerService extends IntentService {
 		this.registerReceiver(mWifiReceiver, new IntentFilter(
 				WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 
-		//Log.d(TAG, "exiting onCreate");
+		Log.d(TAG, "exiting onCreate");
 	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		// Start a wifi scan and sleep
-		//Log.d(WifiScannerService.TAG, "entering onHandleIntent");
+		Log.d(WifiScannerService.TAG, "entering onHandleIntent");
 
 		if (mWifiService.isWifiEnabled()) {
 			mWifiService.startScan();
@@ -48,7 +49,7 @@ public class WifiScannerService extends IntentService {
 			try {
 				Thread.sleep(10 * 1000);
 			} catch (InterruptedException e) {
-				//Log.e(TAG, "Could not sleep", e);
+				Log.e(TAG, "Could not sleep", e);
 			}
 		}
 	}

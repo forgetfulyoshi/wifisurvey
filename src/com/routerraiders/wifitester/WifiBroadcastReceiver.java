@@ -11,10 +11,11 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 
 public class WifiBroadcastReceiver extends BroadcastReceiver {
 
-    //private static final String TAG = "WifiBroadcastReceiver";
+    private static final String TAG = "WifiBroadcastReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -44,7 +45,7 @@ public class WifiBroadcastReceiver extends BroadcastReceiver {
 		try {
 		    database.insertOrThrow(WifiDatabaseHelper.TABLE_WIFI_INFO, null, values);
 		} catch (SQLException e) {
-		    //Log.e(TAG, "Error inserting new result into wifi database", e);
+		    Log.e(TAG, "Error inserting new result into wifi database", e);
 		    throw e;
 		}
 	    } else {
@@ -57,6 +58,6 @@ public class WifiBroadcastReceiver extends BroadcastReceiver {
 	}
 	database.close();
 
-	//Log.d(TAG, "exiting onReceive");
+	Log.d(TAG, "exiting onReceive");
     }
 }

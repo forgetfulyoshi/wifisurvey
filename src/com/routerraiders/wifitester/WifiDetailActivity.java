@@ -12,6 +12,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -50,7 +51,7 @@ public class WifiDetailActivity extends Activity {
 
 	mWifiId = this.getIntent().getLongExtra(WIFI_ID_KEY, 0);
 
-	//Log.d(TAG, "exiting onCreate");
+	Log.d(TAG, "exiting onCreate");
     }
 
     public void onStart() {
@@ -98,7 +99,7 @@ public class WifiDetailActivity extends Activity {
 	cursor.close();
 	database.close();
 
-	//Log.d(TAG, "exiting onStart");
+	Log.d(TAG, "exiting onStart");
     }
 
     public void onPause() {
@@ -116,7 +117,7 @@ public class WifiDetailActivity extends Activity {
 
 	database.close();
 
-	//Log.d(TAG, "exiting onPause");
+	Log.d(TAG, "exiting onPause");
     }
 
     public void onLoginClick(View button) {
@@ -132,7 +133,7 @@ public class WifiDetailActivity extends Activity {
 	if (-1 != netId) {
 	    if (manager.enableNetwork(netId, true)) {
 		Toast.makeText(this.getApplicationContext(), R.string.login_successful, Toast.LENGTH_SHORT).show();
-		//Log.i(TAG, "enabled network " + netId.toString());
+		Log.i(TAG, "enabled network " + netId.toString());
 		manager.saveConfiguration();
 	    } else {
 		Toast.makeText(this.getApplicationContext(), R.string.login_failed, Toast.LENGTH_SHORT).show();
@@ -141,7 +142,7 @@ public class WifiDetailActivity extends Activity {
 	    Toast.makeText(this.getApplicationContext(), R.string.wifi_add_failure, Toast.LENGTH_SHORT).show();
 	}
 
-	//Log.d(TAG, "exiting onLoginClick");
+	Log.d(TAG, "exiting onLoginClick");
     }
 
     private WifiConfiguration generateWifiConfig(String ssid, String security, String password) {
@@ -161,7 +162,7 @@ public class WifiDetailActivity extends Activity {
 	    config.allowedKeyManagement.set(KeyMgmt.NONE);
 	}
 
-	//Log.i(TAG, "Created configuration: " + config.SSID + " :: " + config.preSharedKey);
+	Log.i(TAG, "Created configuration: " + config.SSID + " :: " + config.preSharedKey);
 	
 	
 	return config;
