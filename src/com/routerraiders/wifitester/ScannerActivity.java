@@ -26,9 +26,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-
-
-
 public class ScannerActivity extends ListActivity implements OnItemClickListener {
     /** Called when the activity is first created. */
 
