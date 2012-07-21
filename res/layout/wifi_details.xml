@@ -10,14 +10,16 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/detail_ssid"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/detail_bssid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/detail_bssid"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginLeft="8dp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -41,7 +43,8 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp" >
 
         <TextView
             android:id="@+id/detail_last_seen_lable"
@@ -60,7 +63,8 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp" >
 
         <TextView
             android:id="@+id/detail_frequency_lable"
@@ -78,7 +82,8 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp" >
 
         <TextView
             android:id="@+id/detail_signal_lable"
@@ -99,7 +104,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/detail_security"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginLeft="16dp" />
 
     <LinearLayout
         android:layout_width="fill_parent"

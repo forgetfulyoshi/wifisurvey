@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_gravity="top"
+        android:layout_marginLeft="16dp"
         android:ems="10"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
