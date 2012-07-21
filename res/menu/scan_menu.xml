@@ -4,10 +4,12 @@
     <item
         android:id="@+id/scan_menu_refresh"
         android:icon="@drawable/ic_menu_refresh"
+        android:showAsAction="ifRoom"
         android:title="@string/scan_menu_refresh"/>
     <item
         android:id="@+id/scan_menu_clear"
         android:icon="@drawable/ic_menu_close_clear_cancel"
+        android:showAsAction="ifRoom"
         android:title="@string/scan_menu_clear"/>
 
 </menu>
