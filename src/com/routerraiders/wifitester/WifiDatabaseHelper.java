@@ -3,11 +3,10 @@ package com.routerraiders.wifitester;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class WifiDatabaseHelper extends SQLiteOpenHelper {
 
-	private static final String TAG = "WifiDatabaseHelper";
+	//private static final String TAG = "WifiDatabaseHelper";
 	
 	private static final String DATABASE_NAME = "wifi_info.db";
 	private static final Integer DATABASE_VERSION = 2;
@@ -47,17 +46,17 @@ public class WifiDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(DATABASE_CREATE);
-		Log.d(TAG, "exiting onCreate");
+		//Log.d(TAG, "exiting onCreate");
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.w(TAG, "destroying and re-creating database");
+		//Log.w(TAG, "destroying and re-creating database");
 		
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_WIFI_INFO);
 		onCreate(db);
 		
-		Log.d(TAG, "exiting onUpgrade");
+		//Log.d(TAG, "exiting onUpgrade");
 	}
 
 }
