@@ -123,10 +123,11 @@ public class WifiDetailActivity extends Activity {
     public void onLoginClick(View button) {
 	
 	String ssid = mSsid.getText().toString();
+	String bssid = mBssid.getText().toString();
 	String security = mSecurity.getText().toString();
 	String password = mPassword.getText().toString();
 	
-	WifiConfiguration wifiConfig = generateWifiConfig(ssid, security, password);
+	WifiConfiguration wifiConfig = generateWifiConfig(ssid, bssid, security, password);
 
 	WifiManager manager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
 	Integer netId = manager.addNetwork(wifiConfig);
@@ -141,13 +142,15 @@ public class WifiDetailActivity extends Activity {
 	} else {
 	    Toast.makeText(this.getApplicationContext(), R.string.wifi_add_failure, Toast.LENGTH_SHORT).show();
 	}
+	
 
 	Log.d(TAG, "exiting onLoginClick");
     }
 
-    private WifiConfiguration generateWifiConfig(String ssid, String security, String password) {
+    private WifiConfiguration generateWifiConfig(String ssid, String bssid, String security, String password) {
 	WifiConfiguration config = new WifiConfiguration();
 	config.SSID = "\"" + ssid + "\"";
+	config.BSSID = bssid;
 	config.status = WifiConfiguration.Status.ENABLED;
 	config.priority = 1;
 
