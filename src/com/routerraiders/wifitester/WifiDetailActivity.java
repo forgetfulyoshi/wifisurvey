@@ -2,6 +2,7 @@ package com.routerraiders.wifitester;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -121,16 +122,44 @@ public class WifiDetailActivity extends Activity {
     }
 
     public void onLoginClick(View button) {
-	
+
+	// Pull network data straight off the UI - faster and it gives the most
+	// recent data
 	String ssid = mSsid.getText().toString();
 	String bssid = mBssid.getText().toString();
 	String security = mSecurity.getText().toString();
 	String password = mPassword.getText().toString();
-	
-	WifiConfiguration wifiConfig = generateWifiConfig(ssid, bssid, security, password);
 
 	WifiManager manager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
-	Integer netId = manager.addNetwork(wifiConfig);
+
+	// Check to see if a configuration of SSID + BSSID already exists
+	Integer netId = -1;
+	List<WifiConfiguration> configured = manager.getConfiguredNetworks();
+	for (WifiConfiguration config : configured) {
+	    Log.i(TAG, config.SSID + " vs " + ssid);
+	    Log.i(TAG, config.BSSID + " vs " + bssid);
+
+	    if (config.BSSID == null)
+		continue;
+	    if (config.SSID == null)
+		continue;
+
+	    if (config.BSSID.equals(bssid) && config.SSID.equals("\"" + ssid + "\"")) {
+
+		netId = config.networkId;
+		Log.i(TAG, "Setting netId to " + netId.toString());
+		break;
+	    }
+	}
+
+	// If not, we'll create one
+	if (netId == -1) {
+	    WifiConfiguration wifiConfig = generateWifiConfig(ssid, bssid, security, password);
+	    netId = manager.addNetwork(wifiConfig);
+	    Log.i(TAG, "Generated new config with id " + netId.toString());
+	}
+
+	// Try to connect
 	if (-1 != netId) {
 	    if (manager.enableNetwork(netId, true)) {
 		Toast.makeText(this.getApplicationContext(), R.string.login_successful, Toast.LENGTH_SHORT).show();
@@ -142,11 +171,11 @@ public class WifiDetailActivity extends Activity {
 	} else {
 	    Toast.makeText(this.getApplicationContext(), R.string.wifi_add_failure, Toast.LENGTH_SHORT).show();
 	}
-	
 
 	Log.d(TAG, "exiting onLoginClick");
     }
 
+    // Generate a new configuration based on the following params
     private WifiConfiguration generateWifiConfig(String ssid, String bssid, String security, String password) {
 	WifiConfiguration config = new WifiConfiguration();
 	config.SSID = "\"" + ssid + "\"";
@@ -166,8 +195,7 @@ public class WifiDetailActivity extends Activity {
 	}
 
 	Log.i(TAG, "Created configuration: " + config.SSID + " :: " + config.preSharedKey);
-	
-	
+
 	return config;
     }
 }
