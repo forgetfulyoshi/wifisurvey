@@ -13,6 +13,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -51,7 +52,7 @@ public class WifiDetailActivity extends Activity {
 
 	mWifiId = this.getIntent().getLongExtra(WIFI_ID_KEY, 0);
 
-	//Log.d(TAG, "exiting onCreate");
+	Log.d(TAG, "exiting onCreate");
     }
 
     public void onStart() {
@@ -99,7 +100,7 @@ public class WifiDetailActivity extends Activity {
 	cursor.close();
 	database.close();
 
-	//Log.d(TAG, "exiting onStart");
+	Log.d(TAG, "exiting onStart");
     }
 
     public void onPause() {
@@ -117,7 +118,7 @@ public class WifiDetailActivity extends Activity {
 
 	database.close();
 
-	//Log.d(TAG, "exiting onPause");
+	Log.d(TAG, "exiting onPause");
     }
 
     public void onLoginClick(View button) {
@@ -135,8 +136,8 @@ public class WifiDetailActivity extends Activity {
 	Integer netId = -1;
 	List<WifiConfiguration> configured = manager.getConfiguredNetworks();
 	for (WifiConfiguration config : configured) {
-	    //Log.i(TAG, config.SSID + " vs " + ssid);
-	    //Log.i(TAG, config.BSSID + " vs " + bssid);
+	    Log.i(TAG, config.SSID + " vs " + ssid);
+	    Log.i(TAG, config.BSSID + " vs " + bssid);
 
 	    if (config.BSSID == null)
 		continue;
@@ -146,7 +147,7 @@ public class WifiDetailActivity extends Activity {
 	    if (config.BSSID.equals(bssid) && config.SSID.equals("\"" + ssid + "\"")) {
 
 		netId = config.networkId;
-		//Log.i(TAG, "Setting netId to " + netId.toString());
+		Log.i(TAG, "Setting netId to " + netId.toString());
 		break;
 	    }
 	}
@@ -155,14 +156,14 @@ public class WifiDetailActivity extends Activity {
 	if (netId == -1) {
 	    WifiConfiguration wifiConfig = generateWifiConfig(ssid, bssid, security, password);
 	    netId = manager.addNetwork(wifiConfig);
-	    //Log.i(TAG, "Generated new config with id " + netId.toString());
+	    Log.i(TAG, "Generated new config with id " + netId.toString());
 	}
 
 	// Try to connect
 	if (-1 != netId) {
 	    if (manager.enableNetwork(netId, true)) {
 		Toast.makeText(this.getApplicationContext(), R.string.login_successful, Toast.LENGTH_SHORT).show();
-		//Log.i(TAG, "enabled network " + netId.toString());
+		Log.i(TAG, "enabled network " + netId.toString());
 		manager.saveConfiguration();
 	    } else {
 		Toast.makeText(this.getApplicationContext(), R.string.login_failed, Toast.LENGTH_SHORT).show();
@@ -171,7 +172,7 @@ public class WifiDetailActivity extends Activity {
 	    Toast.makeText(this.getApplicationContext(), R.string.wifi_add_failure, Toast.LENGTH_SHORT).show();
 	}
 
-	//Log.d(TAG, "exiting onLoginClick");
+	Log.d(TAG, "exiting onLoginClick");
     }
 
     // Generate a new configuration based on the following params
@@ -193,7 +194,7 @@ public class WifiDetailActivity extends Activity {
 	    config.allowedKeyManagement.set(KeyMgmt.NONE);
 	}
 
-	//Log.i(TAG, "Created configuration: " + config.SSID + " :: " + config.preSharedKey);
+	Log.i(TAG, "Created configuration: " + config.SSID + " :: " + config.preSharedKey);
 
 	return config;
     }

@@ -13,6 +13,7 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +29,7 @@ import android.widget.TextView;
 public class ScannerActivity extends ListActivity implements OnItemClickListener {
     /** Called when the activity is first created. */
 
-    //private final static String TAG = "ScannerActivity";
+    private final static String TAG = "ScannerActivity";
     private final static int DIALOG_ACTIVATE_WIFI = 1;
 
     private WifiDatabaseHelper mWifiDatabaseHelper;
@@ -59,7 +60,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 	setListAdapter(mAdapter);
 	getListView().setOnItemClickListener(this);
 
-	//Log.d(TAG, "exiting onCreate");
+	Log.d(TAG, "exiting onCreate");
     }
 
     @Override
@@ -72,7 +73,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 	scanWifi();
 	updateWifiList();
 
-	//Log.d(TAG, "exiting onResume");
+	Log.d(TAG, "exiting onResume");
     }
 
     @Override
@@ -83,7 +84,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 	mWifiDatabaseHelper.close();
 	unregisterReceiver(mWifiReceiver);
 
-	//Log.d(TAG, "exiting onPause");
+	Log.d(TAG, "exiting onPause");
     }
 
     @Override
@@ -93,7 +94,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 
 	startActivity(intent);
 
-	//Log.d(TAG, "exiting onItemClick");
+	Log.d(TAG, "exiting onItemClick");
     }
 
     @Override
@@ -195,7 +196,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 	    Cursor cursor = mWifiDatabase.query(WifiDatabaseHelper.TABLE_WIFI_INFO, queryColumns, "", null, null, null,
 		    WifiDatabaseHelper.COLUMN_LAST_SEEN + " DESC");
 
-	    //Log.d(TAG, "exiting doInBackground");
+	    Log.d(TAG, "exiting doInBackground");
 	    return cursor;
 	}
 
@@ -203,7 +204,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 	protected void onPostExecute(Cursor cursor) {
 	    mAdapter.changeCursor(cursor);
 	    mAdapter.notifyDataSetChanged();
-	    //Log.d(TAG, "exiting onPostExecute");
+	    Log.d(TAG, "exiting onPostExecute");
 	}
     }
 }
