@@ -44,9 +44,17 @@
 
         <service
             android:name=".WifiScannerService"
-            android:label="@string/wifi_scanner_service_name"
-            android:exported="false" >
+            android:exported="false"
+            android:label="@string/wifi_scanner_service_name" >
         </service>
+
+        <activity
+            android:name=".LiveScanActivity"
+            android:label="@string/title_activity_live_scan" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.routerraiders.wifitester.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>

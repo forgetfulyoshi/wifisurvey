@@ -26,5 +26,6 @@
     <string name="title_activity_home">Wifi Scan</string>
     <string name="scan_log">All Networks</string>
     <string name="wifi_scanner_service_name">Wifi Scanner Service</string>
+    <string name="title_activity_live_scan">Live Scan</string>
 
 </resources>
