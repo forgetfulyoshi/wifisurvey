@@ -38,7 +38,7 @@ public class WifiDetailActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	this.setContentView(R.layout.wifi_details);
+	this.setContentView(R.layout.activity_wifi_details);
 
 	mSsid = (TextView) this.findViewById(R.id.detail_ssid);
 	mBssid = (TextView) this.findViewById(R.id.detail_bssid);
