@@ -31,4 +31,10 @@ public class HomeActivity extends Activity {
 	Intent launch = new Intent(this, ScanLogActivity.class);
 	startActivity(launch);
     }
+    
+    public void onLiveScanClicked(View v) {
+	Log.d(TAG, "onLiveScanClicked");
+	Intent launch = new Intent(this, LiveScanActivity.class);
+	startActivity(launch);
+    }
 }
