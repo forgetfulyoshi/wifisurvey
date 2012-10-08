@@ -28,8 +28,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ScannerActivity"
-            android:label="@string/scanner_activity_name" >
+            android:name=".ScanLogActivity"
+            android:label="@string/scan_log_activity_name" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
@@ -39,7 +39,7 @@
             android:label="@string/wifi_detail_activity_name" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScannerActivity" />
+                android:value=".ScanLogActivity" />
         </activity>
 
         <service

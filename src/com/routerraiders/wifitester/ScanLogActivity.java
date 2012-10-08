@@ -11,22 +11,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 
-public class ScannerActivity extends ListActivity implements OnItemClickListener {
+public class ScanLogActivity extends ListActivity implements OnItemClickListener {
     /** Called when the activity is first created. */
 
-    private final static String TAG = "ScannerActivity";
+    private final static String TAG = "ScanLogActivity";
     private final static int DIALOG_ACTIVATE_WIFI = 1;
 
     private WifiDatabaseHelper mWifiDatabaseHelper;
@@ -36,7 +33,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	this.setContentView(R.layout.activity_scanner);
+	this.setContentView(R.layout.activity_scan_log);
 
 	ProgressBar emptyView = (ProgressBar) this.findViewById(R.id.scan_summary_progress);
 	getListView().setEmptyView(emptyView);
@@ -55,7 +52,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
     protected void onResume() {
 	super.onResume();
 
-	mWifiDatabaseHelper = new WifiDatabaseHelper(ScannerActivity.this);
+	mWifiDatabaseHelper = new WifiDatabaseHelper(ScanLogActivity.this);
 	mWifiDatabase = mWifiDatabaseHelper.getReadableDatabase();
 
 	updateWifiList();
@@ -117,7 +114,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 	    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
 		public void onClick(DialogInterface dialog, int which) {
-		    ScannerActivity.this.startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+		    ScanLogActivity.this.startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
 		}
 	    });
 
@@ -158,7 +155,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 
     private void updateWifiList() {
 	new AsyncTask<Void, Void, Cursor>() {
-	    private static final String TAG = "ScannerActivity.updateTask";
+	    private static final String TAG = "ScanLogActivity.updateTask";
 
 	    @Override
 	    protected Cursor doInBackground(Void... arg0) {

@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">WiFi Scan</string>
-    <string name="scanner_activity_name">Wifi Scan</string>
+    <string name="scan_log_activity_name">Wifi Scan Log</string>
     <string name="detail_notes_hint">Notes about this network</string>
     <string name="detail_ssid">SSID</string>
     <string name="detail_bssid">BSSID</string>

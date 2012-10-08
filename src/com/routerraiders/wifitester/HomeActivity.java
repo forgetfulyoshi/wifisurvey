@@ -28,7 +28,7 @@ public class HomeActivity extends Activity {
     
     public void onScanLogClicked(View v) {
 	Log.d(TAG, "onScanLogClicked");
-	Intent launch = new Intent(this, ScannerActivity.class);
+	Intent launch = new Intent(this, ScanLogActivity.class);
 	startActivity(launch);
     }
 }
