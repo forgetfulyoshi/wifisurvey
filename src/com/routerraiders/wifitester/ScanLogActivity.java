@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -99,6 +100,9 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	// Handle item selection
 
 	switch (item.getItemId()) {
+	case android.R.id.home:
+	    NavUtils.navigateUpFromSameTask(this);
+	    return true;
 	case R.id.scan_menu_refresh:
 	    updateWifiList();
 	    return true;
