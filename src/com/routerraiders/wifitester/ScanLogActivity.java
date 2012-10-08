@@ -83,7 +83,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 	MenuInflater inflater = getMenuInflater();
-	inflater.inflate(R.menu.scan_menu, menu);
+	inflater.inflate(R.menu.activity_scan_log, menu);
 	return true;
     }
 
