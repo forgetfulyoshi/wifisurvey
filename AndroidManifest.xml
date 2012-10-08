@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="14" />
+        android:targetSdkVersion="15" />
 
     <uses-feature android:name="android.hardware.wifi" />
 
@@ -19,8 +19,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="ScannerActivity"
-            android:label="@string/scanner_activity_name" >
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,8 +28,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="ScannerActivity"
+            android:label="@string/scanner_activity_name" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity
             android:name="WifiDetailActivity"
             android:label="@string/wifi_detail_activity_name" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ScannerActivity" />
         </activity>
     </application>
 

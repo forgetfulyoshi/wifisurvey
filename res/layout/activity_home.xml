@@ -1,0 +1,35 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TableLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TableRow
+        android:id="@+id/home_scan_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/list_selector_background"
+        android:clickable="true"
+        android:onClick="onScanLogClicked" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scan_log"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </TableRow>
+
+    <TableRow
+        android:layout_height="1dp"
+        android:background="#000000" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_span="2"
+            android:text="" >
+        </TextView>
+    </TableRow>
+
+</TableLayout>
