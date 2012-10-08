@@ -1,5 +1,6 @@
 package com.routerraiders.wifitester;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -30,10 +32,15 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
     private SQLiteDatabase mWifiDatabase;
     private SimpleCursorAdapter mAdapter;
 
+    @TargetApi(11)
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	this.setContentView(R.layout.activity_scan_log);
+	
+	if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+	    getActionBar().setDisplayHomeAsUpEnabled(true);
+	}
 
 	ProgressBar emptyView = (ProgressBar) this.findViewById(R.id.scan_summary_progress);
 	getListView().setEmptyView(emptyView);

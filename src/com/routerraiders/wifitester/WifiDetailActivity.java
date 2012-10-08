@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,10 +38,15 @@ public class WifiDetailActivity extends Activity {
 
     private Long mWifiId;
 
+    @TargetApi(11)
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	this.setContentView(R.layout.activity_wifi_details);
 
+	if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+	    getActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+	
 	mSsid = (TextView) this.findViewById(R.id.detail_ssid);
 	mBssid = (TextView) this.findViewById(R.id.detail_bssid);
 	mLocation = (TextView) this.findViewById(R.id.detail_location);
