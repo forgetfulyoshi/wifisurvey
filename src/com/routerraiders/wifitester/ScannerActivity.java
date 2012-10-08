@@ -3,12 +3,10 @@ package com.routerraiders.wifitester;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -19,11 +17,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 
 public class ScannerActivity extends ListActivity implements OnItemClickListener {
     /** Called when the activity is first created. */
@@ -38,13 +36,9 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	this.setContentView(R.layout.activity_scanner);
 
-	TextView emptyView = new TextView(this);
-	emptyView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-	emptyView.setGravity(Gravity.CENTER);
-	emptyView.setText(R.string.main_refresh_hint);
-	emptyView.setTextAppearance(this, android.R.attr.textAppearanceMedium);
-	((ViewGroup) getListView().getParent()).addView(emptyView);
+	ProgressBar emptyView = (ProgressBar) this.findViewById(R.id.scan_summary_progress);
 	getListView().setEmptyView(emptyView);
 
 	String[] fromColumns = { WifiDatabaseHelper.COLUMN_SSID, WifiDatabaseHelper.COLUMN_BSSID };
