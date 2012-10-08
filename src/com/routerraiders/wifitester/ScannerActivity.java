@@ -6,7 +6,6 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.wifi.WifiManager;
@@ -34,9 +33,7 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 
     private WifiDatabaseHelper mWifiDatabaseHelper;
     private SQLiteDatabase mWifiDatabase;
-    private WifiBroadcastReceiver mWifiReceiver;
     private SimpleCursorAdapter mAdapter;
-    private WifiManager mWifiManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,9 +46,6 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 	emptyView.setTextAppearance(this, android.R.attr.textAppearanceMedium);
 	((ViewGroup) getListView().getParent()).addView(emptyView);
 	getListView().setEmptyView(emptyView);
-
-	mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-	mWifiReceiver = new WifiBroadcastReceiver();
 
 	String[] fromColumns = { WifiDatabaseHelper.COLUMN_SSID, WifiDatabaseHelper.COLUMN_BSSID };
 	int[] toViews = { R.id.ssid_text, R.id.bssid_text };
@@ -67,10 +61,9 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
     protected void onResume() {
 	super.onResume();
 
-	registerReceiver(mWifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 	mWifiDatabaseHelper = new WifiDatabaseHelper(ScannerActivity.this);
 	mWifiDatabase = mWifiDatabaseHelper.getReadableDatabase();
-	scanWifi();
+
 	updateWifiList();
 
 	Log.d(TAG, "exiting onResume");
@@ -82,7 +75,6 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 
 	mWifiDatabase.close();
 	mWifiDatabaseHelper.close();
-	unregisterReceiver(mWifiReceiver);
 
 	Log.d(TAG, "exiting onPause");
     }
@@ -151,13 +143,6 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 	return dialog;
     }
 
-    private void scanWifi() {
-	if (!mWifiManager.isWifiEnabled()) {
-	    showDialog(DIALOG_ACTIVATE_WIFI);
-	}
-	mWifiManager.startScan();
-    }
-
     private void clearWifiList() {
 	new AsyncTask<Void, Void, Void>() {
 
@@ -175,36 +160,31 @@ public class ScannerActivity extends ListActivity implements OnItemClickListener
 		mAdapter.notifyDataSetChanged();
 	    }
 	}.execute();
-
-	scanWifi();
     }
 
     private void updateWifiList() {
-	scanWifi();
-	new UpdateTask().execute();
-    }
+	new AsyncTask<Void, Void, Cursor>() {
+	    private static final String TAG = "ScannerActivity.updateTask";
 
-    private class UpdateTask extends AsyncTask<Void, Void, Cursor> {
-	private static final String TAG = "ScannerActivity.updateTask";
+	    @Override
+	    protected Cursor doInBackground(Void... arg0) {
 
-	@Override
-	protected Cursor doInBackground(Void... arg0) {
+		String[] queryColumns = { WifiDatabaseHelper.COLUMN_ID, WifiDatabaseHelper.COLUMN_SSID,
+			WifiDatabaseHelper.COLUMN_BSSID };
 
-	    String[] queryColumns = { WifiDatabaseHelper.COLUMN_ID, WifiDatabaseHelper.COLUMN_SSID,
-		    WifiDatabaseHelper.COLUMN_BSSID };
+		Cursor cursor = mWifiDatabase.query(WifiDatabaseHelper.TABLE_WIFI_INFO, queryColumns, "", null, null,
+			null, WifiDatabaseHelper.COLUMN_LAST_SEEN + " DESC");
 
-	    Cursor cursor = mWifiDatabase.query(WifiDatabaseHelper.TABLE_WIFI_INFO, queryColumns, "", null, null, null,
-		    WifiDatabaseHelper.COLUMN_LAST_SEEN + " DESC");
+		Log.d(TAG, "exiting doInBackground");
+		return cursor;
+	    }
 
-	    Log.d(TAG, "exiting doInBackground");
-	    return cursor;
-	}
-
-	@Override
-	protected void onPostExecute(Cursor cursor) {
-	    mAdapter.changeCursor(cursor);
-	    mAdapter.notifyDataSetChanged();
-	    Log.d(TAG, "exiting onPostExecute");
-	}
+	    @Override
+	    protected void onPostExecute(Cursor cursor) {
+		mAdapter.changeCursor(cursor);
+		mAdapter.notifyDataSetChanged();
+		Log.d(TAG, "exiting onPostExecute");
+	    }
+	}.execute();
     }
 }
