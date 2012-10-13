@@ -5,6 +5,28 @@
     android:layout_height="match_parent" >
 
     <TableRow
+        android:id="@+id/home_live_scan"
+        style="@style/HomeRow"
+        android:onClick="onLiveScanClicked" >
+
+        <TextView
+            style="@style/HomeText"
+            android:text="@string/live_scan" />
+    </TableRow>
+
+    <TableRow
+        android:layout_height="1dp"
+        android:background="#000000" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_span="1"
+            android:text="" >
+        </TextView>
+    </TableRow>
+
+    <TableRow
         android:id="@+id/home_scan_log"
         style="@style/HomeRow"
         android:onClick="onScanLogClicked" >
@@ -21,30 +43,8 @@
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_span="2"
-            android:text="" >
-        </TextView>
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/home_live_scan"
-        style="@style/HomeRow"
-        android:onClick="onLiveScanClicked" >
-
-        <TextView
-            style="@style/HomeText"
-            android:text="@string/live_scan" />
-    </TableRow>
-
-    <TableRow
-        android:layout_height="1dp"
-        android:background="#000000" >
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_span="2"
+            android:layout_height="1dp"
+            android:layout_span="1"
             android:text="" >
         </TextView>
     </TableRow>
