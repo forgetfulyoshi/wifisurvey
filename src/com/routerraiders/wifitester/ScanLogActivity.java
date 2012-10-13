@@ -47,7 +47,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	getListView().setEmptyView(emptyView);
 
 	String[] fromColumns = { WifiDatabaseHelper.COLUMN_SSID, WifiDatabaseHelper.COLUMN_BSSID };
-	int[] toViews = { R.id.ssid_text, R.id.bssid_text };
+	int[] toViews = { R.id.wifi_ssid_text, R.id.wifi_bssid_text };
 
 	mAdapter = new SimpleCursorAdapter(this, R.layout.wifi_entry, null, fromColumns, toViews);
 	setListAdapter(mAdapter);

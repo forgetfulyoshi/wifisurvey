@@ -4,21 +4,30 @@
     android:layout_height="fill_parent" >
 
     <TextView
-        android:id="@+id/ssid_text"
-        android:layout_width="fill_parent"
+        android:id="@+id/wifi_ssid_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_gravity="top"
-        android:layout_marginLeft="16dp"
         android:ems="10"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/bssid_text"
+        android:id="@+id/wifi_bssid_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/wifi_ssid_text"
+        android:ems="10" />
+
+    <ImageView
+        android:id="@+id/wifi_signal_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/ssid_text"
-        android:ems="10" />
+        android:layout_alignParentTop="false"
+        android:layout_centerInParent="false"
+        android:contentDescription="@string/wifi_strength_desc"
+        android:src="@drawable/wifi_strength_0" />
    
 </RelativeLayout>
