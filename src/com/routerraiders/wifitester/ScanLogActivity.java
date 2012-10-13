@@ -21,7 +21,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ProgressBar;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class ScanLogActivity extends ListActivity implements OnItemClickListener {
@@ -32,7 +31,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 
     private WifiDatabaseHelper mWifiDatabaseHelper;
     private SQLiteDatabase mWifiDatabase;
-    private SimpleCursorAdapter mAdapter;
+    private ScanResultCursorAdapter mAdapter;
 
     @TargetApi(11)
     @Override
@@ -47,10 +46,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	ProgressBar emptyView = (ProgressBar) this.findViewById(R.id.scan_summary_progress);
 	getListView().setEmptyView(emptyView);
 
-	String[] fromColumns = { WifiDatabaseHelper.COLUMN_SSID, WifiDatabaseHelper.COLUMN_BSSID };
-	int[] toViews = { R.id.wifi_ssid_text, R.id.wifi_bssid_text };
-
-	mAdapter = new SimpleCursorAdapter(this, R.layout.wifi_entry, null, fromColumns, toViews);
+	mAdapter = new ScanResultCursorAdapter(this, null);
 	setListAdapter(mAdapter);
 	getListView().setOnItemClickListener(this);
 
@@ -174,7 +170,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	    protected Cursor doInBackground(Void... arg0) {
 
 		String[] queryColumns = { WifiDatabaseHelper.COLUMN_ID, WifiDatabaseHelper.COLUMN_SSID,
-			WifiDatabaseHelper.COLUMN_BSSID };
+			WifiDatabaseHelper.COLUMN_BSSID, WifiDatabaseHelper.COLUMN_LEVEL };
 
 		Cursor cursor = mWifiDatabase.query(WifiDatabaseHelper.TABLE_WIFI_INFO, queryColumns, "", null, null,
 			null, WifiDatabaseHelper.COLUMN_LAST_SEEN + " DESC");
