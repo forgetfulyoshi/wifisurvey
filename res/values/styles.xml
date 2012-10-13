@@ -6,7 +6,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@android:drawable/list_selector_background</item>
         <item name="android:clickable">true</item>
-        <item name="android:padding">@dimen/home_row_padding</item>
+        <item name="android:padding">@dimen/row_padding</item>
     </style>
     
     <style name="HomeText">
