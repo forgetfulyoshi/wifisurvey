@@ -108,7 +108,7 @@ public class LiveScanActivity extends ListActivity implements OnItemClickListene
 		manager.startScan();
 		List<ScanResult> results = manager.getScanResults();
 
-		if (!results.isEmpty()) {
+		if (results != null && !results.isEmpty()) {
 		    publishProgress(results.toArray(new ScanResult[] {}));
 		}
 
