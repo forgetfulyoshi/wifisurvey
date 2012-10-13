@@ -37,9 +37,6 @@
         <activity
             android:name=".WifiDetailActivity"
             android:label="@string/wifi_detail_activity_name" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ScanLogActivity" />
         </activity>
 
         <service

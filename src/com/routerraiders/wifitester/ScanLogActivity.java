@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class ScanLogActivity extends ListActivity implements OnItemClickListener {
     /** Called when the activity is first created. */
@@ -81,7 +82,8 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
     @Override
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 	Intent intent = new Intent(this, WifiDetailActivity.class);
-	intent.putExtra(WifiDetailActivity.WIFI_ID_KEY, id);
+	String bssid = String.valueOf(((TextView)v.findViewById(R.id.wifi_bssid_text)).getText());
+	intent.putExtra(WifiDetailActivity.WIFI_ID_KEY, bssid);
 
 	startActivity(intent);
 

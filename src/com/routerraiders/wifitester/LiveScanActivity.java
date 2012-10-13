@@ -8,6 +8,7 @@ import java.util.List;
 import android.annotation.TargetApi;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
@@ -24,7 +25,7 @@ import android.widget.ProgressBar;
 
 public class LiveScanActivity extends ListActivity implements OnItemClickListener {
     private static final String TAG = "LiveScanActivity";
-    private AsyncTask<Context, ScanResult, Void> mScanTask;
+    private ScanTask mScanTask;
     private ScanResultArrayAdapter mArrayAdapter;
     private List<ScanResult> mResults;
 
@@ -47,67 +48,18 @@ public class LiveScanActivity extends ListActivity implements OnItemClickListene
 	mArrayAdapter = new ScanResultArrayAdapter(this, R.layout.wifi_entry, mResults);
 	getListView().setAdapter(mArrayAdapter);
 
-	mScanTask = new AsyncTask<Context, ScanResult, Void>() {
-
-	    @Override
-	    protected Void doInBackground(Context... params) {
-		Context context = params[0];
-		WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-
-		do {
-		    manager.startScan();
-		    List<ScanResult> results = manager.getScanResults();
-
-		    if (!results.isEmpty()) {
-			publishProgress(results.toArray(new ScanResult[] {}));
-		    }
-
-		    try {
-			Thread.sleep(10 * 1000);
-		    } catch (InterruptedException e) {
-			Log.e(TAG, "Could not sleep", e);
-		    }
-
-		} while (!isCancelled());
-
-		return null;
-	    }
-
-	    @Override
-	    protected void onProgressUpdate(ScanResult... scanResults) {
-		List<ScanResult> results = Arrays.asList(scanResults);
-
-		mArrayAdapter.clear();
-
-		for (ScanResult result : results) {
-		    mArrayAdapter.add(result);
-		}
-		mArrayAdapter.sort(new Comparator<ScanResult>() {
-
-		    @Override
-		    public int compare(ScanResult arg0, ScanResult arg1) {
-			if (arg0.level == arg1.level) {
-			    return 0;
-			} else if (arg0.level > arg1.level) {
-			    return -1;
-			} else {
-			    return 1;
-			}
-		    }
-
-		});
-		mArrayAdapter.notifyDataSetChanged();
-	    }
-
-	};
-
 	Log.d(TAG, "exiting onCreate");
     }
 
     @Override
     public void onResume() {
 	super.onResume();
-	mScanTask.execute(this);
+	mScanTask = new ScanTask();
+	try {
+	    mScanTask.execute(this);
+	} catch (IllegalStateException e) {
+	    Log.e(TAG, "Scan already running");
+	}
 	Log.d(TAG, "exiting onResume");
     }
 
@@ -136,7 +88,67 @@ public class LiveScanActivity extends ListActivity implements OnItemClickListene
 
     @Override
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-	// TODO Auto-generated method stub
+	String bssid = String.valueOf(((ScanResultArrayAdapter.ScanResultHolder) v.getTag()).bssidTxt.getText());
+	Intent showDetails = new Intent(this, WifiDetailActivity.class);
+	showDetails.putExtra(WifiDetailActivity.WIFI_ID_KEY, bssid);
+
+	startActivity(showDetails);
+
+    }
+
+    private class ScanTask extends AsyncTask<Context, ScanResult, Void> {
+
+	@Override
+	protected Void doInBackground(Context... params) {
+	    Context context = params[0];
+	    WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+
+	    do {
+		Log.v(TAG, "Running scan...");
+		manager.startScan();
+		List<ScanResult> results = manager.getScanResults();
+
+		if (!results.isEmpty()) {
+		    publishProgress(results.toArray(new ScanResult[] {}));
+		}
+
+		try {
+		    Thread.sleep(10 * 1000);
+		} catch (InterruptedException e) {
+		    Log.e(TAG, "Could not sleep", e);
+		}
+
+	    } while (!isCancelled());
+	    Log.d(TAG, "Got cancelled");
+
+	    return null;
+	}
+
+	@Override
+	protected void onProgressUpdate(ScanResult... scanResults) {
+	    List<ScanResult> results = Arrays.asList(scanResults);
+
+	    mArrayAdapter.clear();
+
+	    for (ScanResult result : results) {
+		mArrayAdapter.add(result);
+	    }
+	    mArrayAdapter.sort(new Comparator<ScanResult>() {
+
+		@Override
+		public int compare(ScanResult arg0, ScanResult arg1) {
+		    if (arg0.level == arg1.level) {
+			return 0;
+		    } else if (arg0.level > arg1.level) {
+			return -1;
+		    } else {
+			return 1;
+		    }
+		}
+
+	    });
+	    mArrayAdapter.notifyDataSetChanged();
+	}
 
     }
 

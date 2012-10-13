@@ -36,7 +36,7 @@ public class WifiDetailActivity extends Activity {
     private EditText mPassword;
     private EditText mNotes;
 
-    private Long mWifiId;
+    private String mWifiId;
 
     @TargetApi(11)
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class WifiDetailActivity extends Activity {
 	if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
-	
+
 	mSsid = (TextView) this.findViewById(R.id.detail_ssid);
 	mBssid = (TextView) this.findViewById(R.id.detail_bssid);
 	mLocation = (TextView) this.findViewById(R.id.detail_location);
@@ -57,7 +57,7 @@ public class WifiDetailActivity extends Activity {
 	mPassword = (EditText) this.findViewById(R.id.detail_password);
 	mNotes = (EditText) this.findViewById(R.id.detail_notes);
 
-	mWifiId = this.getIntent().getLongExtra(WIFI_ID_KEY, 0);
+	mWifiId = getIntent().getStringExtra(WIFI_ID_KEY);
 
 	Log.d(TAG, "exiting onCreate");
     }
@@ -74,35 +74,38 @@ public class WifiDetailActivity extends Activity {
 		WifiDatabaseHelper.COLUMN_PASSWORD, WifiDatabaseHelper.COLUMN_NOTES,
 		WifiDatabaseHelper.COLUMN_FREQUENCY, WifiDatabaseHelper.COLUMN_LEVEL };
 
-	Cursor cursor = database.query(WifiDatabaseHelper.TABLE_WIFI_INFO, queryColumns, WifiDatabaseHelper.COLUMN_ID
-		+ "=?", new String[] { mWifiId.toString() }, null, null, null);
+	Cursor cursor = database.query(WifiDatabaseHelper.TABLE_WIFI_INFO, queryColumns,
+		WifiDatabaseHelper.COLUMN_BSSID + "=?", new String[] { mWifiId }, null, null, null);
 
-	cursor.moveToFirst();
-	String ssid = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_SSID));
-	String bssid = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_BSSID));
-	String location = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_LOCATION));
-	Long lastSeen = cursor.getLong(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_LAST_SEEN));
-	String security = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_SECURITY));
-	String password = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_PASSWORD));
-	String notes = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_NOTES));
-	Long frequency = cursor.getLong(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_FREQUENCY));
-	Long level = cursor.getLong(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_LEVEL));
+	if (cursor.getCount() > 0) {
 
-	mSsid.setText(ssid);
-	mBssid.setText(bssid);
-	mLocation.setText(location);
+	    cursor.moveToFirst();
+	    String ssid = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_SSID));
+	    String bssid = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_BSSID));
+	    String location = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_LOCATION));
+	    Long lastSeen = cursor.getLong(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_LAST_SEEN));
+	    String security = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_SECURITY));
+	    String password = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_PASSWORD));
+	    String notes = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_NOTES));
+	    Long frequency = cursor.getLong(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_FREQUENCY));
+	    Long level = cursor.getLong(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_LEVEL));
 
-	Date date = new Date(lastSeen);
-	SimpleDateFormat formatter = new SimpleDateFormat("MMMM d yyy 'at' hh:mm:ss");
-	String formattedDateString = formatter.format(date);
-	mLastSeen.setText(formattedDateString);
+	    mSsid.setText(ssid);
+	    mBssid.setText(bssid);
+	    mLocation.setText(location);
 
-	mFrequency.setText(frequency.toString() + " MHz");
-	mSignal.setText(level.toString() + " dBm");
+	    Date date = new Date(lastSeen);
+	    SimpleDateFormat formatter = new SimpleDateFormat("MMMM d yyy 'at' hh:mm:ss");
+	    String formattedDateString = formatter.format(date);
+	    mLastSeen.setText(formattedDateString);
 
-	mSecurity.setText(security);
-	mPassword.setText(password);
-	mNotes.setText(notes);
+	    mFrequency.setText(frequency.toString() + " MHz");
+	    mSignal.setText(level.toString() + " dBm");
+
+	    mSecurity.setText(security);
+	    mPassword.setText(password);
+	    mNotes.setText(notes);
+	}
 
 	cursor.close();
 	database.close();
@@ -120,8 +123,8 @@ public class WifiDetailActivity extends Activity {
 	values.put(WifiDatabaseHelper.COLUMN_PASSWORD, mPassword.getText().toString());
 	values.put(WifiDatabaseHelper.COLUMN_NOTES, mNotes.getText().toString());
 
-	database.update(WifiDatabaseHelper.TABLE_WIFI_INFO, values, WifiDatabaseHelper.COLUMN_ID + "=?",
-		new String[] { mWifiId.toString() });
+	database.update(WifiDatabaseHelper.TABLE_WIFI_INFO, values, WifiDatabaseHelper.COLUMN_BSSID + "=?",
+		new String[] { mWifiId });
 
 	database.close();
 
