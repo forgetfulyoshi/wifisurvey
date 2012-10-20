@@ -105,14 +105,14 @@ public class LiveScanActivity extends ListActivity implements OnItemClickListene
 
 	    do {
 		Log.v(TAG, "Running scan...");
-		if (!manager.isWifiEnabled()) {
-		    continue;
-		}
-		manager.startScan();
-		List<ScanResult> results = manager.getScanResults();
+		if (manager.isWifiEnabled()) {
 
-		if (results != null && !results.isEmpty()) {
-		    publishProgress(results.toArray(new ScanResult[] {}));
+		    manager.startScan();
+		    List<ScanResult> results = manager.getScanResults();
+
+		    if (results != null && !results.isEmpty()) {
+			publishProgress(results.toArray(new ScanResult[] {}));
+		    }
 		}
 
 		try {
