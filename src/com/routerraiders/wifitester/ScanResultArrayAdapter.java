@@ -44,7 +44,7 @@ public class ScanResultArrayAdapter extends ArrayAdapter<ScanResult> {
 	    holder = (ScanResultHolder) row.getTag();
 	}
 	
-	Integer iconId = ImageHandler.getWifiIconResource(mContext, getItem(position).level);
+	Integer iconId = ImageHandler.getWifiIconResource(mContext, getItem(position).level, getItem(position).capabilities);
 	holder.wifiStrengthImg.setImageResource(iconId);
 
 	holder.bssidTxt.setText(getItem(position).BSSID);
