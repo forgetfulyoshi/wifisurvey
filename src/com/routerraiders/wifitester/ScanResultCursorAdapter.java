@@ -24,7 +24,6 @@ public class ScanResultCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-	// TODO Auto-generated method stub
 	
 	TextView ssid = (TextView) view.findViewById(R.id.wifi_ssid_text);
 	ssid.setText(cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_SSID)));
@@ -34,7 +33,10 @@ public class ScanResultCursorAdapter extends CursorAdapter {
 	
 	ImageView signal = (ImageView) view.findViewById(R.id.wifi_signal_image);
 
-	Integer iconId = ImageHandler.getWifiIconResource(context, (int) cursor.getLong(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_LEVEL)));
+	Integer level = (int) cursor.getLong(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_LEVEL));
+	String security = cursor.getString(cursor.getColumnIndex(WifiDatabaseHelper.COLUMN_SECURITY));
+	
+	Integer iconId = ImageHandler.getWifiIconResource(context, level, security);
 	signal.setImageResource(iconId);
 	
     }

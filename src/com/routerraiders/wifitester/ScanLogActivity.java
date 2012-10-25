@@ -170,7 +170,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	    protected Cursor doInBackground(Void... arg0) {
 
 		String[] queryColumns = { WifiDatabaseHelper.COLUMN_ID, WifiDatabaseHelper.COLUMN_SSID,
-			WifiDatabaseHelper.COLUMN_BSSID, WifiDatabaseHelper.COLUMN_LEVEL };
+			WifiDatabaseHelper.COLUMN_BSSID, WifiDatabaseHelper.COLUMN_LEVEL, WifiDatabaseHelper.COLUMN_SECURITY };
 
 		Cursor cursor = mWifiDatabase.query(WifiDatabaseHelper.TABLE_WIFI_INFO, queryColumns, "", null, null,
 			null, WifiDatabaseHelper.COLUMN_LAST_SEEN + " DESC");
