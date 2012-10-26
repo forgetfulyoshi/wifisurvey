@@ -26,5 +26,7 @@
     <string name="title_activity_live_scan">Live Scan</string>
     <string name="live_scan">Live Wifi Scan</string>
     <string name="wifi_strength_desc">Wifi signal strength</string>
+    <string name="blue_lock">A blue padlock</string>
+    <string name="menu_about">About</string>
 
 </resources>
