@@ -140,13 +140,7 @@ public class LiveScanActivity extends ListActivity implements OnItemClickListene
 
 		@Override
 		public int compare(ScanResult arg0, ScanResult arg1) {
-		    if (arg0.level == arg1.level) {
-			return 0;
-		    } else if (arg0.level > arg1.level) {
-			return -1;
-		    } else {
-			return 1;
-		    }
+		    return arg1.level - arg0.level;
 		}
 
 	    });
