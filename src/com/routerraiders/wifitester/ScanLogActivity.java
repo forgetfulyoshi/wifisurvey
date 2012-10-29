@@ -1,7 +1,12 @@
 package com.routerraiders.wifitester;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -23,6 +28,8 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
     /** Called when the activity is first created. */
 
     private final static String TAG = "ScanLogActivity";
+
+    private static final int DIALOG_CLEAR_CHECK = 0;
 
     private WifiDatabaseHelper mWifiDatabaseHelper;
     private SQLiteDatabase mWifiDatabase;
@@ -100,11 +107,39 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	    updateWifiList();
 	    return true;
 	case R.id.scan_menu_clear:
-	    clearWifiList();
+	    this.showDialog(DIALOG_CLEAR_CHECK);
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);
 	}
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+	switch (id) {
+	case DIALOG_CLEAR_CHECK:
+	    Builder builder = new AlertDialog.Builder(this);
+	    builder.setMessage(R.string.dialog_confirm_clear);
+	    builder.setCancelable(false);
+	    builder.setPositiveButton(R.string.dialog_yes, new OnClickListener(){
+
+		@Override
+		public void onClick(DialogInterface arg0, int arg1) {
+		    ScanLogActivity.this.clearWifiList();
+		}
+	    });
+	    builder.setNegativeButton(R.string.dialog_no, new OnClickListener(){
+
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+		    dialog.cancel();
+		}
+	    });
+	    AlertDialog dialog = builder.create();
+	    dialog.show();
+	}
+	
+	return super.onCreateDialog(id);
     }
 
     private void clearWifiList() {
@@ -112,9 +147,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 
 	    @Override
 	    protected Void doInBackground(Void... params) {
-
 		mWifiDatabase.delete(WifiDatabaseHelper.TABLE_WIFI_INFO, null, null);
-
 		return null;
 	    }
 
