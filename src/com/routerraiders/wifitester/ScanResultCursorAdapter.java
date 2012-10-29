@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.routerraiders.wifitester.utils.ImageHandler;
+import com.routerraiders.wifitester.util.ImageHandler;
 
 public class ScanResultCursorAdapter extends CursorAdapter {
 

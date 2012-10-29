@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.routerraiders.wifitester.utils.ImageHandler;
+import com.routerraiders.wifitester.util.ImageHandler;
 
 public class ScanResultArrayAdapter extends ArrayAdapter<ScanResult> {
 

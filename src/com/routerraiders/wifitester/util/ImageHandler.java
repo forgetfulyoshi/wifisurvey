@@ -1,4 +1,4 @@
-package com.routerraiders.wifitester.utils;
+package com.routerraiders.wifitester.util;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
