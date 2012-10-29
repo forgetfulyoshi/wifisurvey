@@ -1,4 +1,4 @@
-package com.routerraiders.wifitester;
+package com.routerraiders.wifitester.dialog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.util.Linkify;
 import android.widget.TextView;
+
+import com.routerraiders.wifitester.R;
 
 public class AboutDialog extends Dialog {
     private static Context mContext = null;

@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.routerraiders.wifitester.dialog.AboutDialog;
+
 public class HomeActivity extends Activity {
 
     private static final String TAG = "HomeActivity";
