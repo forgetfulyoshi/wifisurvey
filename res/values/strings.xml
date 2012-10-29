@@ -31,5 +31,6 @@
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
     <string name="dialog_confirm_clear">Permenantly erase the entire scan log?</string>
+    <string name="scan_log_empty">No scan data to display. Refresh to check again.</string>
 
 </resources>

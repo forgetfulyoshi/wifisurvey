@@ -9,12 +9,14 @@
         android:layout_height="wrap_content" >
     </ListView>
 
-    <ProgressBar
-        android:id="@+id/scan_summary_progress"
-        style="?android:attr/progressBarStyleLarge"
+    <TextView
+        android:id="@+id/scan_log_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:text="@string/scan_log_empty"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:gravity="center"
         android:visibility="invisible" />
 
 </RelativeLayout>

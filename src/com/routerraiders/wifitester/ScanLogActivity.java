@@ -21,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class ScanLogActivity extends ListActivity implements OnItemClickListener {
@@ -45,7 +44,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
-	ProgressBar emptyView = (ProgressBar) this.findViewById(R.id.scan_summary_progress);
+	TextView emptyView = (TextView) this.findViewById(R.id.scan_log_empty);
 	getListView().setEmptyView(emptyView);
 
 	mAdapter = new ScanResultCursorAdapter(this, null);
@@ -107,7 +106,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	    updateWifiList();
 	    return true;
 	case R.id.scan_menu_clear:
-	    this.showDialog(DIALOG_CLEAR_CHECK);
+	    showDialog(DIALOG_CLEAR_CHECK);
 	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);
