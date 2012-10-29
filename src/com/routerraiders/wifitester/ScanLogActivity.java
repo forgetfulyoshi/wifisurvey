@@ -1,17 +1,13 @@
 package com.routerraiders.wifitester;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -27,7 +23,6 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
     /** Called when the activity is first created. */
 
     private final static String TAG = "ScanLogActivity";
-    private final static int DIALOG_ACTIVATE_WIFI = 1;
 
     private WifiDatabaseHelper mWifiDatabaseHelper;
     private SQLiteDatabase mWifiDatabase;
@@ -38,7 +33,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	this.setContentView(R.layout.activity_scan_log);
-	
+
 	if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
@@ -78,7 +73,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
     @Override
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 	Intent intent = new Intent(this, WifiDetailActivity.class);
-	String bssid = String.valueOf(((TextView)v.findViewById(R.id.wifi_bssid_text)).getText());
+	String bssid = String.valueOf(((TextView) v.findViewById(R.id.wifi_bssid_text)).getText());
 	intent.putExtra(WifiDetailActivity.WIFI_ID_KEY, bssid);
 
 	startActivity(intent);
@@ -112,37 +107,6 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	}
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-	Dialog dialog;
-	switch (id) {
-	case DIALOG_ACTIVATE_WIFI:
-	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setMessage(R.string.dialog_activate_wifi);
-	    builder.setCancelable(false);
-	    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-		public void onClick(DialogInterface dialog, int which) {
-		    ScanLogActivity.this.startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-		}
-	    });
-
-	    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-
-		public void onClick(DialogInterface dialog, int which) {
-		    dialog.cancel();
-		}
-	    });
-
-	    dialog = builder.create();
-	    break;
-
-	default:
-	    dialog = null;
-	}
-	return dialog;
-    }
-
     private void clearWifiList() {
 	new AsyncTask<Void, Void, Void>() {
 
@@ -170,7 +134,8 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	    protected Cursor doInBackground(Void... arg0) {
 
 		String[] queryColumns = { WifiDatabaseHelper.COLUMN_ID, WifiDatabaseHelper.COLUMN_SSID,
-			WifiDatabaseHelper.COLUMN_BSSID, WifiDatabaseHelper.COLUMN_LEVEL, WifiDatabaseHelper.COLUMN_SECURITY };
+			WifiDatabaseHelper.COLUMN_BSSID, WifiDatabaseHelper.COLUMN_LEVEL,
+			WifiDatabaseHelper.COLUMN_SECURITY };
 
 		Cursor cursor = mWifiDatabase.query(WifiDatabaseHelper.TABLE_WIFI_INFO, queryColumns, "", null, null,
 			null, WifiDatabaseHelper.COLUMN_LAST_SEEN + " DESC");
