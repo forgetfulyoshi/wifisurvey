@@ -28,5 +28,7 @@
     <string name="wifi_strength_desc">Wifi signal strength</string>
     <string name="blue_lock">A blue padlock</string>
     <string name="menu_about">About</string>
+    <string name="wifi_dialog_yes">Yes</string>
+    <string name="wifi_dialog_no">No</string>
 
 </resources>
