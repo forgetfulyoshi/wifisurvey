@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Invisible Painting</string>
-    <string name="scan_log_activity_name">Wifi History</string>
+    <string name="app_name">Wifi Scan</string>
+    <string name="scan_log_activity_name">Scan History</string>
     <string name="detail_notes_hint">Notes about this network</string>
     <string name="detail_ssid">SSID</string>
     <string name="detail_bssid">BSSID</string>
@@ -20,7 +20,7 @@
     <string name="login_successful">Login was successful</string>
     <string name="login_failed">Login failed</string>
     <string name="wifi_add_failure">Failed to add network</string>
-    <string name="title_activity_home">Invisible Painting</string>
+    <string name="title_activity_home">Wifi Scan</string>
     <string name="scan_log">Wifi Scan History</string>
     <string name="wifi_scanner_service_name">Wifi Scanner Service</string>
     <string name="title_activity_live_scan">Live Scan</string>
@@ -30,7 +30,7 @@
     <string name="menu_about">About</string>
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
-    <string name="dialog_confirm_clear">Permenantly erase the entire scan log?</string>
+    <string name="dialog_confirm_clear">Permenantly erase the entire scan history?</string>
     <string name="scan_log_empty">No scan data to display. Refresh to check again.</string>
 
 </resources>

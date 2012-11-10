@@ -1,5 +1,4 @@
-<h2>Invisible Painting</h2>
-<h3>WiFi Survey</h3>
+<h2>WiFi Scan</h2>
 Version 0.4.0<br>
 Copyright 2012<br>
 <b>www.routerraiders.com</b>
