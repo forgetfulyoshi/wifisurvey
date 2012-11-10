@@ -94,6 +94,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	return true;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	// Handle item selection
@@ -113,6 +114,7 @@ public class ScanLogActivity extends ListActivity implements OnItemClickListener
 	}
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected Dialog onCreateDialog(int id) {
 	switch (id) {
